@@ -65,4 +65,4 @@ async def run(ctx):
         await ctx.send(embed=embed)    
 
 
-bot.run('OTEwOTA3MjMzMTYyODg3MTk4.YZZqeA.rMm2gIZJcjs7dXqjQ24_pO4Hpts')
+bot.run('')
