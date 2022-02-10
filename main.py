@@ -65,4 +65,4 @@ async def run(ctx):
         await ctx.send(embed=embed)    
 
 
-bot.run('')
+bot.run(os.environ.get('token'))
