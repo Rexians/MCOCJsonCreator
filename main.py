@@ -1,3 +1,4 @@
+import asyncio
 from src.utils import Utils
 from src.champs import ChampsInfo
 from pymongo import MongoClient
@@ -48,10 +49,12 @@ async def run(ctx):
                         await ctx.send(f'Going for {tier}* {champ} of rank {rank} and sig {signature}')
                         champs.get_champ_info(champ, tier, rank, signature)
                         champ_json[f"{tier}+{rank}+{signature}"]= champs.champsjson
-                        await ctx.send(f'Scraped {tier}* {champ} of rank {rank} and sig {signature}')                        
+                        await ctx.send(f'Scraped {tier}* {champ} of rank {rank} and sig {signature}')        
+                        await asyncio.sleep(15)                
                     except LookupError:
                         await ctx.send(f'Got A Error from {tier}* {champ} of {rank} and sig {signature}. \n Document in DB will be created but data will have to be entered manually.')    
                         error_list.append(f'{tier}* {champ}, Rank {rank}, Sig {signature}')
+                        await asyncio.sleep(15)
         champ_json = {'champid':champ, 'data':champ_json}
         db.insert_one(champ_json)             
 
