@@ -32,7 +32,7 @@ class ChampsInfo():
                     if x.text == f'{signature}' and x.get_attribute('class') == 'dropdown-item':
                         print('     ')
                         x.click()
-                        sig_json = x.text
+                        sig_json = signature
                     else:
                         continue    
             
@@ -62,7 +62,7 @@ class ChampsInfo():
                 "energy_resist" : energy_resist_access.text,
                 "physical_resist" : physical_resist_access.text,
                 "crit_resist" : crit_resist_access.text,
-                "sig_number" : sig_json,
+                "sig_number" : signature,
                 "sig_info" : sig_info_access.text,
                 "url_page" : url,
                 "champid" : f"{champname}+{tier}+{rank}+{signature}",
