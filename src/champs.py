@@ -7,12 +7,12 @@ class ChampsInfo():
     def __init__(self) -> None:
         pass
 
-    def get_champ_info(self, champname, tier, rank, signature):
+    def get_champ_info(self, champname, tier, rank):
         url = f"https://auntm.ai/champions/{champname}/tier/{tier}"
         opts = webdriver.ChromeOptions()
         opts.add_argument("--no-sandbox");
         opts.add_argument("--disable-dev-shm-usage");
-        #opts.add_argument(" --headless");
+        opts.add_argument(" --headless");
         opts.add_argument("--disable-gpu")        
         browser = webdriver.Chrome(options=opts)
         try:
@@ -21,20 +21,6 @@ class ChampsInfo():
             
             browser.find_element(By.ID, 'rankDropdown').click()
             browser.find_element(By.XPATH, f"//*[contains(text(), 'RANK {rank}')]").click()
-            sig_json = 0
-            if signature !=0:
-                
-                browser.find_element(By.ID, 'sigDropdown').click()
-                sig_select = browser.find_elements(By.XPATH, f"//*[contains(text(), '{signature}')]")
-
-                for x in sig_select:
-                                        
-                    if x.text == f'{signature}' and x.get_attribute('class') == 'dropdown-item':
-                        print('     ')
-                        x.click()
-                        sig_json = signature
-                    else:
-                        continue    
             
             name_acc = browser.find_element(By.CSS_SELECTOR, '.sc-bZSQDF')
             link_acc = browser.find_element(By.CSS_SELECTOR, 'div.sc-bkzZxe:nth-child(1) > img:nth-child(1) ').get_attribute("src")
@@ -62,10 +48,9 @@ class ChampsInfo():
                 "energy_resist" : energy_resist_access.text,
                 "physical_resist" : physical_resist_access.text,
                 "crit_resist" : crit_resist_access.text,
-                "sig_number" : signature,
                 "sig_info" : sig_info_access.text,
                 "url_page" : url,
-                "champid" : f"{champname}+{tier}+{rank}+{signature}",
+                "champid" : f"{champname}+{tier}+{rank}",
                 "img_potrait" : link_acc
             }   
             browser.close()    
